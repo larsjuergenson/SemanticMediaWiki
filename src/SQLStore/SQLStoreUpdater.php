@@ -64,6 +64,11 @@ class SQLStoreUpdater {
 	private $redirectUpdater;
 
 	/**
+	 * @var boolean
+	 */
+	private $hasEqualitySupport = false;
+
+	/**
 	 * @since 1.8
 	 *
 	 * @param SQLStore $store
@@ -76,6 +81,16 @@ class SQLStoreUpdater {
 		$this->propertyTableUpdater = $this->factory->newPropertyTableUpdater();
 		$this->semanticDataLookup = $this->factory->newSemanticDataLookup();
 		$this->redirectUpdater = $this->factory->newRedirectUpdater();
+		$this->setEqualitySupportFlag( $GLOBALS['smwgQEqualitySupport'] );
+	}
+
+	/**
+	 * @since 3.2
+	 *
+	 * @param integer $equalitySupport
+	 */
+	public function setEqualitySupportFlag( $equalitySupport ) {
+		$this->hasEqualitySupport = $equalitySupport != SMW_EQ_NONE;
 	}
 
 	/**
@@ -291,10 +306,14 @@ class SQLStoreUpdater {
 		if ( count( $redirects ) > 0 ) {
 			$redirect = end( $redirects ); // at most one redirect per page
 			$this->redirectUpdater->updateRedirects( $subject, $redirect );
-			// Stop here:
-			// * no support for annotations on redirect pages
-			// * updateRedirects takes care of deleting any previous data
-			return;
+
+			if ( $this->hasEqualitySupport ) {
+				// Stop here:
+				// * no support for annotations on redirect pages if equality
+				//   support is enabled
+				// * updateRedirects takes care of deleting any previous data
+				return;
+			}
 		} else {
 			$this->redirectUpdater->updateRedirects( $subject );
 		}

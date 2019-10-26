@@ -222,6 +222,7 @@ class SQLStoreUpdaterTest extends \PHPUnit_Framework_TestCase {
 			->will( $this->returnValue( new \SMW\Options() ) );
 
 		$instance = new SQLStoreUpdater( $parentStore, $this->factory );
+		$instance->setEqualitySupportFlag( SMW_EQ_SOME );
 		$instance->doDataUpdate( $semanticData );
 	}
 
@@ -275,6 +276,7 @@ class SQLStoreUpdaterTest extends \PHPUnit_Framework_TestCase {
 			->will( $this->returnValue( new \SMW\Options() ) );
 
 		$instance = new SQLStoreUpdater( $parentStore, $this->factory );
+		$instance->setEqualitySupportFlag( SMW_EQ_SOME );
 		$instance->doDataUpdate( $semanticData );
 	}
 
@@ -324,6 +326,7 @@ class SQLStoreUpdaterTest extends \PHPUnit_Framework_TestCase {
 			->will( $this->returnValue( new \SMW\Options() ) );
 
 		$instance = new SQLStoreUpdater( $parentStore, $this->factory );
+		$instance->setEqualitySupportFlag( SMW_EQ_SOME );
 		$instance->doDataUpdate( $semanticData );
 	}
 
@@ -379,6 +382,7 @@ class SQLStoreUpdaterTest extends \PHPUnit_Framework_TestCase {
 			->will( $this->returnValue( new \SMW\Options() ) );
 
 		$instance = new SQLStoreUpdater( $parentStore, $this->factory );
+		$instance->setEqualitySupportFlag( SMW_EQ_SOME );
 		$instance->doDataUpdate( $semanticData );
 	}
 
@@ -428,6 +432,7 @@ class SQLStoreUpdaterTest extends \PHPUnit_Framework_TestCase {
 			->will( $this->returnValue( new \SMW\Options() ) );
 
 		$instance = new SQLStoreUpdater( $this->store, $this->factory );
+		$instance->setEqualitySupportFlag( SMW_EQ_SOME );
 		$instance->deleteSubject( $title );
 	}
 
@@ -486,6 +491,7 @@ class SQLStoreUpdaterTest extends \PHPUnit_Framework_TestCase {
 			->will( $this->returnValue( new \SMW\Options() ) );
 
 		$instance = new SQLStoreUpdater( $this->store, $this->factory );
+		$instance->setEqualitySupportFlag( SMW_EQ_SOME );
 		$instance->deleteSubject( $title );
 	}
 

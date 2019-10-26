@@ -1,0 +1,55 @@
+{
+	"description": "Test redirect pages with annotations, with equality support disabled",
+	"setup": [
+		{
+			"namespace": "SMW_NS_PROPERTY",
+			"page": "Has text",
+			"contents": "[[Has type::text]]"
+		},
+		{
+			"namespace": "SMW_NS_PROPERTY",
+			"page": "Has other text",
+			"contents": "[[Has type::text]]"
+		},
+		{
+			"page": "Target-1121",
+			"contents": "[[Has other text::Foo]]"
+		},
+		{
+			"page": "Redirect-1121",
+			"contents": "#REDIRECT [[Target-1121]] [[Has text::Foo]]"
+		}
+	],
+	"tests": [
+		{
+			"type": "parser",
+			"about": "#0 Verify that redirect page has (only) the properties annotated",
+			"subject": "Redirect-1121",
+			"assert-store": {
+				"semantic-data": {
+					"strict-mode-valuematch": false,
+					"propertyCount": 3,
+					"propertyKeys": [	
+						"Has text",
+						"_MDAT",
+						"_SKEY"
+					]
+				}
+			}
+		}
+	],
+	"settings": {
+		"wgContLang": "en",
+		"wgLang": "en",
+		"smwgQEqualitySupport" : 0,
+		"smwgNamespacesWithSemanticLinks": {
+			"NS_MAIN": true,
+			"SMW_NS_PROPERTY": true
+		}
+	},
+	"meta": {
+		"version": "2",
+		"is-incomplete": false,
+		"debug": false
+	}
+}
